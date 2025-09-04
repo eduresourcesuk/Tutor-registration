@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Become a Tutor | EduResources UK</title>
+  <meta name="description" content="Join EduResources UK as a tutor. Share your knowledge with students across the country." />
+
+  <!-- Use Inter font for a clean, modern look (common in Next.js apps) -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      /* Define CSS variables for consistent theming */
+      --color-background: #f8fafc; /* Very light gray/blue background */
+      --color-surface: #ffffff;    /* Pure white for cards */
+      --color-text-primary: #0f172a; /* Dark slate for main text */
+      --color-text-secondary: #64748b; /* Slate for secondary text */
+      --color-accent: #2563eb;     /* Professional blue */
+      --color-border: #e2e8f0;     /* Light border color */
+      --border-radius: 12px;       /* Consistent rounded corners */
+      --box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.05); /* Subtle shadow */
+      --transition-speed: 0.3s;    /* Smooth transitions */
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+      background-color: var(--color-background);
+      color: var(--color-text-primary);
+      line-height: 1.6;
+    }
+
+    .container {
+      /* Center the content block */
+      max-width: 768px; /* Slightly narrower for better readability on larger screens */
+      margin: 50px auto;
+      padding: 0 20px; /* Padding on smaller screens */
+    }
+
+    /* Header section styling */
+    .header {
+      text-align: center;
+      margin-bottom: 40px;
+      padding: 30px 20px; /* Add internal padding */
+      background-color: var(--color-surface);
+      border-radius: var(--border-radius);
+      box-shadow: var(--box-shadow);
+    }
+
+    .logo {
+      font-size: 1.8rem; /* Slightly smaller, cleaner logo */
+      font-weight: 700;
+      color: var(--color-text-primary);
+      text-decoration: none;
+      margin-bottom: 15px; /* Space below logo */
+      display: inline-block; /* Allows margin to work */
+    }
+
+    .logo span {
+        color: var(--color-accent); /* Accent color for part of the logo */
+    }
+
+    h1 {
+      font-size: 1.8rem; /* Adjusted size */
+      font-weight: 600;
+      color: var(--color-text-primary);
+      margin-bottom: 12px;
+    }
+
+    .subtitle {
+      font-size: 1.1rem;
+      color: var(--color-text-secondary); /* Use secondary text color */
+      max-width: 600px; /* Limit width for better readability */
+      margin: 0 auto; /* Center the subtitle */
+    }
+
+
+    /* Main form card styling */
+    .card {
+      background-color: var(--color-surface);
+      border-radius: var(--border-radius);
+      box-shadow: var(--box-shadow);
+      overflow: hidden; /* Ensures border-radius clips content */
+      margin-bottom: 30px; /* Space before footer */
+      position: relative; /* For absolute positioning of loader */
+    }
+
+    .card-header {
+        padding: 20px 25px; /* Consistent padding */
+        border-bottom: 1px solid var(--color-border);
+        background-color: #f1f5f9; /* Very subtle header background */
+        font-size: 1.1rem;
+        font-weight: 500;
+        color: var(--color-text-primary);
+    }
+
+    /* Styling for the iframe container */
+    .form-wrapper {
+      position: relative; /* Needed for absolute positioning of loader */
+      min-height: 700px; /* Minimum height to reduce initial layout shift */
+    }
+
+    .form-frame {
+      width: 100%;
+      height: 750px; /* Adjusted height */
+      border: none;
+      display: block; /* Removes potential small gap */
+      opacity: 0; /* Start hidden */
+      transition: opacity var(--transition-speed) ease-in-out; /* Smooth fade-in */
+    }
+
+    .form-frame.loaded {
+      opacity: 1; /* Fade in when loaded */
+    }
+
+    /* Styling for the loading overlay */
+    .loading-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: var(--color-surface); /* Match card background */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 10; /* Ensure it's on top */
+      transition: opacity var(--transition-speed) ease-in-out;
+    }
+
+    .loading-overlay.hidden {
+        opacity: 0;
+        pointer-events: none; /* Allow interactions after hiding */
+    }
+
+    .spinner {
+        width: 40px;
+        height: 40px;
+        border: 4px solid rgba(37, 99, 235, 0.2); /* Light blue ring */
+        border-top: 4px solid var(--color-accent); /* Blue segment */
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+
+    .loading-text {
+        margin-top: 15px;
+        color: var(--color-text-secondary);
+        font-size: 1rem;
+    }
+
+    /* Footer styling */
+    footer {
+      text-align: center;
+      padding: 20px;
+      color: var(--color-text-secondary);
+      font-size: 0.9rem;
+    }
+
+    footer a {
+      color: var(--color-accent);
+      text-decoration: none;
+      transition: color var(--transition-speed);
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+      /* color can change on hover if desired */
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .container {
+        margin: 30px auto; /* Reduce top/bottom margin on small screens */
+        padding: 0 15px;
+      }
+      .header {
+        padding: 20px 15px; /* Reduce padding */
+        margin-bottom: 30px;
+      }
+      h1 {
+        font-size: 1.6rem; /* Smaller heading on mobile */
+      }
+      .subtitle {
+        font-size: 1rem; /* Smaller subtitle on mobile */
+      }
+      .card-header {
+        padding: 15px 20px; /* Reduce padding */
+        font-size: 1rem;
+      }
+      .form-frame {
+        height: 850px; /* Adjust height for mobile if needed */
+      }
+      .loading-text {
+        font-size: 0.9rem; /* Smaller loading text */
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <!-- Header Section -->
+    <header class="header">
+      <a href="/" class="logo">Edu<span>Resources</span> UK</a>
+      <h1>Join Our Team of Tutors</h1>
+      <p class="subtitle">We're looking for passionate educators to inspire students across the UK. Start your application below.</p>
+    </header>
+
+    <!-- Main Card containing the form -->
+    <main class="card">
+        <div class="card-header">
+            Tutor Application Form
+        </div>
+        <div class="form-wrapper">
+            <!-- Loading Overlay -->
+            <div class="loading-overlay" id="formLoader">
+                <div>
+                    <div class="spinner"></div>
+                    <div class="loading-text">Loading application form...</div>
+                </div>
+            </div>
+
+            <!-- Embedded Tally Form Iframe -->
+            <iframe
+              src="https://tally.so/embed/w7yyO6?transparentBg=1&hideTitle=1"
+              class="form-frame"
+              frameborder="0"
+              title="EduResources Tutor Registration Form"
+              id="tallyFrame"
+              loading="lazy">
+            </iframe>
+        </div>
+    </main>
+
+    <!-- Footer Section -->
+    <footer>
+      &copy; <span id="year">2025</span> EduResources UK. All rights reserved.
+      <br>
+      <a href="/privacy">Privacy Policy</a> • <a href="/terms">Terms of Service</a>
+    </footer>
+  </div>
+
+  <script>
+    // Set current year in footer
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Handle iframe loading and hide loader
+    const iframe = document.getElementById('tallyFrame');
+    const loader = document.getElementById('formLoader');
+
+    // Show loader initially
+    loader.classList.remove('hidden');
+
+    // Listen for the iframe to load
+    iframe.addEventListener('load', function() {
+        // Add the 'loaded' class for fade-in effect
+        iframe.classList.add('loaded');
+        // Hide the loader overlay smoothly
+        loader.classList.add('hidden');
+    });
+
+    // Optional: Fallback in case 'load' event doesn't fire perfectly
+    // Sometimes Tally might trigger load before content is fully rendered visually.
+    // A slight delay can help ensure the loader covers the transition better.
+    // setTimeout(() => {
+    //     iframe.classList.add('loaded');
+    //     loader.classList.add('hidden');
+    // }, 500); // Adjust delay as needed
+
+  </script>
+
+</body>
+</html>

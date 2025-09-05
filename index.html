@@ -6,21 +6,44 @@
   <title>Become a Tutor | EduResources UK</title>
   <meta name="description" content="Join EduResources UK as a tutor. Share your knowledge with students across the country." />
 
-  <!-- Use Inter font for a clean, modern look (common in Next.js apps) -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Inter Font from Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Font Awesome for Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
 
   <style>
     :root {
-      /* Define CSS variables for consistent theming */
-      --color-background: #f8fafc; /* Very light gray/blue background */
-      --color-surface: #ffffff;    /* Pure white for cards */
-      --color-text-primary: #0f172a; /* Dark slate for main text */
-      --color-text-secondary: #64748b; /* Slate for secondary text */
-      --color-accent: #2563eb;     /* Professional blue */
-      --color-border: #e2e8f0;     /* Light border color */
-      --border-radius: 12px;       /* Consistent rounded corners */
-      --box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.05); /* Subtle shadow */
-      --transition-speed: 0.3s;    /* Smooth transitions */
+      /* --- Tailwind-inspired Color Palette --- */
+      --tw-color-slate-50: #f8fafc;
+      --tw-color-slate-100: #f1f5f9;
+      --tw-color-slate-200: #e2e8f0;
+      --tw-color-slate-300: #cbd5e1;
+      --tw-color-slate-400: #94a3b8;
+      --tw-color-slate-500: #64748b;
+      --tw-color-slate-600: #475569;
+      --tw-color-slate-700: #334155;
+      --tw-color-slate-800: #1e293b;
+      --tw-color-slate-900: #0f172a;
+      --tw-color-blue-500: #3b82f6;
+      --tw-color-blue-600: #2563eb;
+      --tw-color-blue-700: #1d4ed8;
+
+      /* --- Custom Theme Variables --- */
+      --color-background: var(--tw-color-slate-50);
+      --color-surface: #ffffff; /* Pure white card */
+      --color-text-primary: var(--tw-color-slate-800);
+      --color-text-secondary: var(--tw-color-slate-600);
+      --color-text-placeholder: var(--tw-color-slate-400);
+      --color-accent: var(--tw-color-blue-600);
+      --color-accent-hover: var(--tw-color-blue-700);
+      --color-border: var(--tw-color-slate-200);
+      --color-border-focus: var(--tw-color-blue-500);
+      --border-radius-lg: 12px;
+      --border-radius-sm: 8px;
+      --box-shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
+      --box-shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+      --box-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+      --transition-default: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     * {
@@ -34,206 +57,279 @@
       background-color: var(--color-background);
       color: var(--color-text-primary);
       line-height: 1.6;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh; /* Ensure footer sticks to bottom */
     }
 
-    .container {
-      /* Center the content block */
-      max-width: 768px; /* Slightly narrower for better readability on larger screens */
-      margin: 50px auto;
-      padding: 0 20px; /* Padding on smaller screens */
+    .main-container {
+      flex: 1; /* Take up available space */
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      padding: 2rem 1rem; /* py-8 px-4 */
     }
 
-    /* Header section styling */
-    .header {
-      text-align: center;
-      margin-bottom: 40px;
-      padding: 30px 20px; /* Add internal padding */
+    .content-wrapper {
+      width: 100%;
+      max-width: 640px; /* max-w-lg / max-w-xl */
+    }
+
+    /* --- Header Section --- */
+    .header-card {
       background-color: var(--color-surface);
-      border-radius: var(--border-radius);
-      box-shadow: var(--box-shadow);
+      border-radius: var(--border-radius-lg);
+      box-shadow: var(--box-shadow-md);
+      padding: 2rem; /* p-8 */
+      text-align: center;
+      margin-bottom: 2rem; /* mb-8 */
+      animation: fadeInUp 0.6s ease-out forwards;
+      opacity: 0;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     .logo {
-      font-size: 1.8rem; /* Slightly smaller, cleaner logo */
-      font-weight: 700;
+      font-size: 1.875rem; /* text-3xl */
+      font-weight: 700; /* font-bold */
       color: var(--color-text-primary);
       text-decoration: none;
-      margin-bottom: 15px; /* Space below logo */
-      display: inline-block; /* Allows margin to work */
+      margin-bottom: 0.75rem; /* mb-3 */
+      display: inline-block;
     }
 
     .logo span {
-        color: var(--color-accent); /* Accent color for part of the logo */
+      color: var(--color-accent);
     }
 
-    h1 {
-      font-size: 1.8rem; /* Adjusted size */
-      font-weight: 600;
+    .header-title {
+      font-size: 1.5rem; /* text-2xl */
+      font-weight: 600; /* font-semibold */
       color: var(--color-text-primary);
-      margin-bottom: 12px;
+      margin-bottom: 0.5rem; /* mb-2 */
     }
 
-    .subtitle {
-      font-size: 1.1rem;
-      color: var(--color-text-secondary); /* Use secondary text color */
-      max-width: 600px; /* Limit width for better readability */
-      margin: 0 auto; /* Center the subtitle */
+    .header-subtitle {
+      font-size: 1.125rem; /* text-lg */
+      color: var(--color-text-secondary);
+      margin-bottom: 1.5rem; /* mb-6 */
     }
 
+    .features-list {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.75rem; /* gap-3 */
+      list-style: none;
+      padding: 0;
+      margin: 0 0 1.5rem; /* mb-6 */
+    }
 
-    /* Main form card styling */
-    .card {
+    .feature-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem; /* gap-2 */
+      background-color: var(--tw-color-slate-100);
+      color: var(--color-text-secondary);
+      padding: 0.5rem 1rem; /* py-2 px-4 */
+      border-radius: 9999px; /* rounded-full */
+      font-size: 0.875rem; /* text-sm */
+      box-shadow: var(--box-shadow-sm);
+    }
+
+    .feature-item i {
+      color: var(--color-accent);
+      font-size: 0.875rem; /* text-sm */
+    }
+
+    /* --- Form Card --- */
+    .form-card {
       background-color: var(--color-surface);
-      border-radius: var(--border-radius);
-      box-shadow: var(--box-shadow);
-      overflow: hidden; /* Ensures border-radius clips content */
-      margin-bottom: 30px; /* Space before footer */
-      position: relative; /* For absolute positioning of loader */
+      border-radius: var(--border-radius-lg);
+      box-shadow: var(--box-shadow-lg);
+      overflow: hidden;
+      position: relative;
+      animation: fadeIn 0.8s ease-out 0.2s forwards;
+      opacity: 0;
     }
 
-    .card-header {
-        padding: 20px 25px; /* Consistent padding */
-        border-bottom: 1px solid var(--color-border);
-        background-color: #f1f5f9; /* Very subtle header background */
-        font-size: 1.1rem;
-        font-weight: 500;
-        color: var(--color-text-primary);
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
     }
 
-    /* Styling for the iframe container */
+    .form-card-header {
+      padding: 1.25rem 1.5rem; /* py-5 px-6 */
+      background-color: var(--tw-color-slate-50); /* Subtle header */
+      border-bottom: 1px solid var(--color-border);
+      display: flex;
+      align-items: center;
+      gap: 0.75rem; /* gap-3 */
+      font-weight: 500; /* font-medium */
+      color: var(--color-text-primary);
+    }
+
+    .form-card-header i {
+      color: var(--color-accent);
+    }
+
+    /* --- Form Wrapper & Iframe --- */
     .form-wrapper {
-      position: relative; /* Needed for absolute positioning of loader */
-      min-height: 700px; /* Minimum height to reduce initial layout shift */
+      position: relative;
+      min-height: 700px; /* Prevent major layout shift */
     }
 
     .form-frame {
       width: 100%;
-      height: 750px; /* Adjusted height */
+      height: 750px; /* Adjust if needed */
       border: none;
-      display: block; /* Removes potential small gap */
-      opacity: 0; /* Start hidden */
-      transition: opacity var(--transition-speed) ease-in-out; /* Smooth fade-in */
+      display: block;
+      opacity: 0;
+      transform: scale(0.98);
+      transition: opacity 0.4s ease, transform 0.4s ease;
     }
 
     .form-frame.loaded {
-      opacity: 1; /* Fade in when loaded */
+      opacity: 1;
+      transform: scale(1);
     }
 
-    /* Styling for the loading overlay */
+    /* --- Loading Overlay --- */
     .loading-overlay {
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background-color: var(--color-surface); /* Match card background */
+      background-color: var(--color-surface);
       display: flex;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
-      z-index: 10; /* Ensure it's on top */
-      transition: opacity var(--transition-speed) ease-in-out;
+      z-index: 20;
+      transition: opacity 0.4s ease, visibility 0.4s ease;
+      opacity: 1;
+      visibility: visible;
     }
 
     .loading-overlay.hidden {
-        opacity: 0;
-        pointer-events: none; /* Allow interactions after hiding */
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
     }
 
     .spinner {
-        width: 40px;
-        height: 40px;
-        border: 4px solid rgba(37, 99, 235, 0.2); /* Light blue ring */
-        border-top: 4px solid var(--color-accent); /* Blue segment */
-        border-radius: 50%;
-        animation: spin 1s linear infinite;
+      width: 48px;
+      height: 48px;
+      border: 4px solid rgba(59, 130, 246, 0.2); /* blue-500 with opacity */
+      border-top: 4px solid var(--color-accent);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin-bottom: 1rem; /* mb-4 */
     }
 
     @keyframes spin {
-        0% { transform: rotate(0deg); }
-        100% { transform: rotate(360deg); }
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
     }
 
     .loading-text {
-        margin-top: 15px;
-        color: var(--color-text-secondary);
-        font-size: 1rem;
+      color: var(--color-text-secondary);
+      font-size: 1rem; /* base */
     }
 
-    /* Footer styling */
+    /* --- Footer --- */
     footer {
+      width: 100%;
       text-align: center;
-      padding: 20px;
+      padding: 1.5rem; /* py-6 */
       color: var(--color-text-secondary);
-      font-size: 0.9rem;
+      font-size: 0.875rem; /* text-sm */
+      background-color: var(--tw-color-slate-100); /* Slight footer background */
     }
 
     footer a {
       color: var(--color-accent);
       text-decoration: none;
-      transition: color var(--transition-speed);
+      font-weight: 500;
+      transition: var(--transition-default);
     }
 
     footer a:hover {
+      color: var(--color-accent-hover);
       text-decoration: underline;
-      /* color can change on hover if desired */
     }
 
-    /* Responsive adjustments */
-    @media (max-width: 768px) {
-      .container {
-        margin: 30px auto; /* Reduce top/bottom margin on small screens */
-        padding: 0 15px;
+    /* --- Responsive --- */
+    @media (min-width: 640px) { /* sm breakpoint */
+      .main-container {
+        padding: 3rem 1.5rem; /* sm:py-12 sm:px-6 */
       }
-      .header {
-        padding: 20px 15px; /* Reduce padding */
-        margin-bottom: 30px;
+      .header-card {
+        padding: 2.5rem; /* sm:p-10 */
       }
-      h1 {
-        font-size: 1.6rem; /* Smaller heading on mobile */
+      .header-title {
+        font-size: 1.875rem; /* sm:text-3xl */
       }
-      .subtitle {
-        font-size: 1rem; /* Smaller subtitle on mobile */
-      }
-      .card-header {
-        padding: 15px 20px; /* Reduce padding */
-        font-size: 1rem;
-      }
-      .form-frame {
-        height: 850px; /* Adjust height for mobile if needed */
-      }
-      .loading-text {
-        font-size: 0.9rem; /* Smaller loading text */
+      .header-subtitle {
+        font-size: 1.25rem; /* sm:text-xl */
       }
     }
+
+    @media (min-width: 768px) { /* md breakpoint */
+      .content-wrapper {
+        max-width: 768px; /* md:max-w-3xl */
+      }
+    }
+
   </style>
 </head>
 <body>
 
-  <div class="container">
-    <!-- Header Section -->
-    <header class="header">
-      <a href="/" class="logo">Edu<span>Resources</span> UK</a>
-      <h1>Join Our Team of Tutors</h1>
-      <p class="subtitle">We're looking for passionate educators to inspire students across the UK. Start your application below.</p>
-    </header>
+  <div class="main-container">
+    <div class="content-wrapper">
 
-    <!-- Main Card containing the form -->
-    <main class="card">
-        <div class="card-header">
-            Tutor Application Form
+      <!-- Header Card -->
+      <header class="header-card">
+        <a href="/" class="logo">Edu<span>Resources</span> UK</a>
+        <h1 class="header-title">Join Our Team of Tutors</h1>
+        <p class="header-subtitle">We're looking for passionate educators to inspire students across the UK.</p>
+
+        <!-- Feature Badges -->
+        <ul class="features-list">
+          <li class="feature-item"><i class="fas fa-lock"></i> Secure</li>
+          <li class="feature-item"><i class="fas fa-user-check"></i> Verified</li>
+          <li class="feature-item"><i class="fas fa-bolt"></i> Fast Review</li>
+          <li class="feature-item"><i class="fas fa-flag-gb"></i> UK-Based</li>
+        </ul>
+      </header>
+
+      <!-- Main Form Card -->
+      <main class="form-card">
+        <div class="form-card-header">
+            <i class="fas fa-pen-alt"></i>
+            <span>Tutor Application Form</span>
         </div>
         <div class="form-wrapper">
             <!-- Loading Overlay -->
             <div class="loading-overlay" id="formLoader">
-                <div>
-                    <div class="spinner"></div>
-                    <div class="loading-text">Loading application form...</div>
-                </div>
+                <div class="spinner"></div>
+                <div class="loading-text">Preparing your application...</div>
             </div>
 
             <!-- Embedded Tally Form Iframe -->
             <iframe
-              src="https://tally.so/embed/w7yyO6?transparentBg=1&hideTitle=1"
+              src="https://tally.so/embed/w7yyO6?transparentBg=1&hideTitle=1&emojiAnimation=none"
               class="form-frame"
               frameborder="0"
               title="EduResources Tutor Registration Form"
@@ -241,15 +337,17 @@
               loading="lazy">
             </iframe>
         </div>
-    </main>
+      </main>
 
-    <!-- Footer Section -->
-    <footer>
-      &copy; <span id="year">2025</span> EduResources UK. All rights reserved.
-      <br>
-      <a href="/privacy">Privacy Policy</a> • <a href="/terms">Terms of Service</a>
-    </footer>
+    </div>
   </div>
+
+  <!-- Footer -->
+  <footer>
+    &copy; <span id="year">2025</span> EduResources UK. All rights reserved.
+    <br>
+    <a href="/privacy">Privacy Policy</a> • <a href="/terms">Terms of Service</a>
+  </footer>
 
   <script>
     // Set current year in footer
@@ -259,24 +357,17 @@
     const iframe = document.getElementById('tallyFrame');
     const loader = document.getElementById('formLoader');
 
-    // Show loader initially
+    // Ensure loader is visible initially
     loader.classList.remove('hidden');
 
     // Listen for the iframe to load
     iframe.addEventListener('load', function() {
         // Add the 'loaded' class for fade-in effect
-        iframe.classList.add('loaded');
-        // Hide the loader overlay smoothly
-        loader.classList.add('hidden');
+        setTimeout(() => {
+             iframe.classList.add('loaded');
+             loader.classList.add('hidden');
+        }, 300); // Small delay for better visual transition
     });
-
-    // Optional: Fallback in case 'load' event doesn't fire perfectly
-    // Sometimes Tally might trigger load before content is fully rendered visually.
-    // A slight delay can help ensure the loader covers the transition better.
-    // setTimeout(() => {
-    //     iframe.classList.add('loaded');
-    //     loader.classList.add('hidden');
-    // }, 500); // Adjust delay as needed
 
   </script>
 
